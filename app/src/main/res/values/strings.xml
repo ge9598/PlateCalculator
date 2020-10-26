@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">PlateCalculator</string>
+    <string name="Plate45">4</string>
+    <string name="Plate35">2</string>
+    <string name="Plate25">4</string>
+    <string name="Plate10">2</string>
+    <string name="Plate5">4</string>
+    <string name="Plate2_5">2</string>
+    <string name="Plate1_25">4</string>
+
+</resources>
