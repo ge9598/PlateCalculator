@@ -12,6 +12,7 @@ import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.function.Consumer;
 
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String PLATE_5 = "PLATE_5";
     public static final String PLATE_2_5 = "PLATE_2_5";
     public static final String PLATE_1_25 = "PLATE_1_25";
+    public static final String SAVE_COMPLETE = "Save was Success";
 
 
     @Override
@@ -61,15 +63,31 @@ public class MainActivity extends AppCompatActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                saveInfo();
+                try {
+                    saveInfo();
+
+                }catch (Exception e){
+                    Toast.makeText(MainActivity.this, "Something Went wrong, please check your savings!", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+                Toast.makeText(MainActivity.this,"Save Info Successed!", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(getApplicationContext(), CalculateActivity.class);
+                startActivity(intent);
+
             }
         });
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                saveInfo();
-                Intent intent = new Intent(getApplicationContext(), CalculateActivity.class);
-                startActivity(intent);
+                try {
+                    saveInfo();
+
+                }catch (Exception e){
+                    Toast.makeText(getApplicationContext(), "Something Went wrong, please check your savings!", Toast.LENGTH_SHORT).show();
+                }
+                Toast.makeText(getApplicationContext(),"Save Info Success!", Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -91,34 +109,34 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences prefInfo = getSharedPreferences(SP_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefInfo.edit();
-        editor.putInt(PLATE_45, plate45);
-        editor.putInt(PLATE_35, plate35);
-        editor.putInt(PLATE_25, plate25);
-        editor.putInt(PLATE_10, plate10);
-        editor.putInt(PLATE_5, plate5);
-        editor.putInt(PLATE_2_5, plate2_5);
-        editor.putInt(PLATE_1_25, plate1_25);
+        editor.putString(PLATE_45, String.valueOf(plate45));
+        editor.putString(PLATE_35, String.valueOf(plate35));
+        editor.putString(PLATE_25, String.valueOf(plate25));
+        editor.putString(PLATE_10, String.valueOf(plate10));
+        editor.putString(PLATE_5, String.valueOf(plate5));
+        editor.putString(PLATE_2_5, String.valueOf(plate2_5));
+        editor.putString(PLATE_1_25, String.valueOf(plate1_25));
         editor.apply();
-        finish();
+
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         SharedPreferences prefInfo = getSharedPreferences(SP_NAME, Context.MODE_PRIVATE);
-        int plate45 = Integer.parseInt(prefInfo.getString(PLATE_45, getResources().getString(R.string.Plate45)));
-        int plate35 = Integer.parseInt(prefInfo.getString(PLATE_35, getResources().getString(R.string.Plate35)));
-        int plate25 = Integer.parseInt(prefInfo.getString(PLATE_25, getResources().getString(R.string.Plate25)));
-        int plate10 = Integer.parseInt(prefInfo.getString(PLATE_10, getResources().getString(R.string.Plate10)));
-        int plate5 = Integer.parseInt(prefInfo.getString(PLATE_5, getResources().getString(R.string.Plate5)));
-        int plate2_5 = Integer.parseInt(prefInfo.getString(PLATE_2_5, getResources().getString(R.string.Plate2_5)));
-        int plate1_25 = Integer.parseInt(prefInfo.getString(PLATE_1_25, getResources().getString(R.string.Plate1_25)));
-        edtPlate45.setText(plate45);
-        edtPlate35.setText(plate35);
-        edtPlate25.setText(plate25);
-        edtPlate10.setText(plate10);
-        edtPlate5.setText(plate5);
-        edtplate2_5.setText(plate2_5);
-        edtplate1_25.setText(plate1_25);
+//        String plate45 = (prefInfo.getString(PLATE_45, getResources().getString(R.string.Plate45)));
+//        String plate35 = (prefInfo.getString(PLATE_35, getResources().getString(R.string.Plate35)));
+//        String plate25 = (prefInfo.getString(PLATE_25, getResources().getString(R.string.Plate25)));
+//        String plate10 = (prefInfo.getString(PLATE_10, getResources().getString(R.string.Plate10)));
+//        String plate5 = (prefInfo.getString(PLATE_5, getResources().getString(R.string.Plate5)));
+//        String plate2_5 = (prefInfo.getString(PLATE_2_5, getResources().getString(R.string.Plate2_5)));
+//        String plate1_25 = (prefInfo.getString(PLATE_1_25, getResources().getString(R.string.Plate1_25)));
+//        edtPlate45.setText(plate45);
+//        edtPlate35.setText(plate35);
+//        edtPlate25.setText(plate25);
+//        edtPlate10.setText(plate10);
+//        edtPlate5.setText(plate5);
+//        edtplate2_5.setText(plate2_5);
+//        edtplate1_25.setText(plate1_25);
     }
 }
