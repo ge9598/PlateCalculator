@@ -107,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
         int plate1_25 = Integer.parseInt(edtplate1_25.getText().toString());
 
 
+
         SharedPreferences prefInfo = getSharedPreferences(SP_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefInfo.edit();
         editor.putString(PLATE_45, String.valueOf(plate45));
